@@ -75,17 +75,20 @@ public class Wordle {
         for (int i = 0; i < guess.length(); i++) {
             char guessChar = guess.charAt(i);
             char secretChar = secret.charAt(i);
+            boolean ignoreNow=false;
             boolean isCorrect = containsChar(guess, secretChar);
             //System.out.println(resultRow[i]);
             if (isCorrect) {
                 if (guessChar == secretChar) {
                     resultRow[i] = 'G';
                     //System.out.println("here 1");
+                    ignoreNow=true;
                 } else {
                     resultRow[i] = 'Y';
                     //System.out.println("here 2");
+                    ignoreNow=true;
                 }
-            } else {
+            } else if (!ignoreNow) {
                 resultRow[i] = '_';
                 //System.out.println("here 3");
             }
