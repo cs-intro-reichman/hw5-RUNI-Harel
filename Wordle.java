@@ -211,13 +211,12 @@ public class Wordle {
             attempt++;
         }
 
-        /*
-         * if (!won) {
-         * // ... follow the assignment examples for how the printing should look like
-         * }
-         * 
-         * inp.close();
-         * }
-         */
+        if (!won) {
+        // ... follow the assignment examples for how the printing should look like
+        System.out.println("Sorry, you did not guess the word.");
+        System.out.println("The secret word was: " + secret);
+        }
+        
+        inp.close();
+        }
     }
-}
