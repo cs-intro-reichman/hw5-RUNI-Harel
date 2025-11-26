@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Wordle {
+public class Wordle2 {
 
     // Reads all words from dictionary filename into a String array.
     public static String[] readDictionary(String filename) {
@@ -68,7 +68,7 @@ public class Wordle {
 
     // Compute feedback for a single guess into resultRow.
     // G for exact match, Y if letter appears anywhere else, _ otherwise.
-    public static void computeFeedback(String secret, String guess, char[] resultRow) {
+    public static void computeFeedbackUnused(String secret, String guess, char[] resultRow) {
         // ...
         // you may want to use containsChar in your implementation
         // hello heeyo
@@ -76,22 +76,45 @@ public class Wordle {
             char guessChar = guess.charAt(i);
             char secretChar = secret.charAt(i);
             boolean isCorrect = containsChar(guess, secretChar);
-            //System.out.println(resultRow[i]);
+            System.out.println(resultRow[i]);
             if (isCorrect) {
                 if (guessChar == secretChar) {
                     resultRow[i] = 'G';
-                    //System.out.println("here 1");
+                    System.out.println("here 1");
                 } else {
                     resultRow[i] = 'Y';
-                    //System.out.println("here 2");
+                    System.out.println("here 2");
                 }
             } else {
                 resultRow[i] = '_';
-                //System.out.println("here 3");
+                System.out.println("here 3");
             }
         }
     }
 
+        public static void computeFeedback(String secret, String guess, int row,  char[][] results) {
+        // ...
+        // you may want to use containsChar in your implementation
+        // hello heeyo
+        for (int i = 0; i < guess.length(); i++) {
+            char guessChar = guess.charAt(i);
+            char secretChar = secret.charAt(i);
+            boolean isCorrect = containsChar(guess, secretChar);
+            System.out.println(results[row][i]);
+            if (isCorrect) {
+                if (guessChar == secretChar) {
+                    results[row][i] = 'G';
+                    //System.out.println("here 1");
+                } else {
+                    results[row][i] = 'Y';
+                    //System.out.println("here 2");
+                }
+            } else {
+                results[row][i] = '_';
+                //System.out.println("here 3");
+            }
+        }
+    }
 
 
     // Store guess string (chars) into the given row of guesses 2D array.
@@ -103,7 +126,7 @@ public class Wordle {
     // guesses[2][3] // 'L'
     // guesses[2][4] // 'O'
 
-    public static void storeGuess(String guess, char[][] guesses, int row) {// maybe add results[][]
+    public static void storeGuess(String guess, char[][] guesses, int row) {//maybe add results[][]
         // ...
         for (int i = 0; i < guess.length(); i++) {
             guesses[row][i] = guess.charAt(i);
@@ -132,7 +155,7 @@ public class Wordle {
         // ...
         for (int i = 0; i < resultRow.length; i++) {
             if (resultRow[i] != 'G') {
-                //System.out.println(resultRow[i] + " " + i);
+                System.out.println(resultRow[i] +" "+ i);
                 return false;
             }
         }
@@ -184,7 +207,7 @@ public class Wordle {
             while (!valid) {
                 System.out.print("Enter your guess (5-letter word): ");
                 guess = inp.readString();// ... read from the standrad input
-                guess = guess.toUpperCase();
+                guess=guess.toUpperCase();
                 if (!(guess.length() == WORD_LENGTH)/* ... check if the guess is valid */) {
                     System.out.println("Invalid word. Please try again.");
                 } else {
@@ -195,7 +218,7 @@ public class Wordle {
             // Store guess and compute feedback
             // ... use storeGuess and computeFeedback
             storeGuess(guess, guesses, attempt);
-            computeFeedback(secret, guess, results[attempt]);
+            computeFeedback(secret, guess, attempt, results);
 
             // Print board
             printBoard(guesses, results, attempt);
