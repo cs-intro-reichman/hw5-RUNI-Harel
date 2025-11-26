@@ -72,28 +72,44 @@ public class Wordle {
         // ...
         // you may want to use containsChar in your implementation
         // hello heeyo
+        //init the resultsRow
+        for (int i=0;i<resultRow.length;i++){
+            resultRow[i]='_';
+        }
         for (int i = 0; i < guess.length(); i++) {
             char guessChar = guess.charAt(i);
             char secretChar = secret.charAt(i);
-            boolean ignoreNow=false;
-            boolean isCorrect = containsChar(guess, secretChar);
+            //boolean ignoreNow=false;
+            //swapped guess with secret and secretChar with guessChar - works now!
+            boolean isCorrect = containsChar(secret, guessChar);
             //System.out.println(resultRow[i]);
             if (isCorrect) {
                 if (guessChar == secretChar) {
                     resultRow[i] = 'G';
                     //System.out.println("here 1");
-                    ignoreNow=true;
+                    //ignoreNow=true;
                 } else {
                     resultRow[i] = 'Y';
                     //System.out.println("here 2");
-                    ignoreNow=true;
+                    //ignoreNow=true;
                 }
-            } else if (!ignoreNow) {
-                resultRow[i] = '_';
-                //System.out.println("here 3");
-            }
+            //}else{
+            //    resultRow[i] = '_';
+            //}
         }
+        /*for(int j=0;j<resultRow.length;j++){
+            char guessChar = guess.charAt(j);
+            char secretChar = secret.charAt(j);
+            if(resultRow[j] == 'G'){
+                for(int k=0;k<secret.length();k++){
+                    if(secret.charAt(k)==guess.charAt(k)&&resultRow[k]=='_'){
+                        resultRow[k]='Y';
+                    }
+                }
+            }
+        }*/
     }
+}
 
 
 
